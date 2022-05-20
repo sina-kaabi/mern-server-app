@@ -3,8 +3,21 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const dbUrl = "mongodb+srv://javascriptsina:Cash21077@cluster0.fjvmk.mongodb.net/?retryWrites=true&w=majorityl"
 require('dotenv').config()
 
+const connectionParams = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}
+
+mongoose.connect(dbUrl, connectionParams)
+.then(() => {
+  console.info("Connected to DB");
+})
+.catch((e) => {
+  console.log("Error:", e);
+});
 
 
 // app
