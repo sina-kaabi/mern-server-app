@@ -1,10 +1,15 @@
-const express = require('express')
-const morgan = require('morgan')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const mongoose = require('mongoose')
-const dbUrl = "mongodb+srv://javascriptsina:Cash21077@cluster0.fjvmk.mongodb.net/?retryWrites=true&w=majorityl"
-require('dotenv').config()
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const dbUrl = "mongodb+srv://javascriptsina:Cash21077@cluster0.fjvmk.mongodb.net/?retryWrites=true&w=majorityl";
+require('dotenv').config();
+
+
+// import routes 
+
+const postRoutes = require('./routes/post')
 
 const connectionParams = {
     useNewUrlParser: true,
@@ -38,19 +43,15 @@ const app = express();
 
 // middlewares
 
-app.use(cors())
-app.use(morgan('dev'))
-app.use(bodyParser.json())
+app.use(cors());
+app.use(morgan('dev'));
+app.use(bodyParser.json());
 
 
-// route
+// route middleware
 
-//wildcard route
-app.get('*', (req,res) => {
-    res.json({
-            data: 'You reached nodejs api for react node crud app'
-        })
-})
+app.use('/api', postRoutes);
+
 
 
 // try {
@@ -72,7 +73,7 @@ app.get('*', (req,res) => {
   // port
 
 const port = process.env.PORT || 5001
-app.listen(port, () => console.log(`Server is listening at ${port}`))
+app.listen(port, () => console.log(`Server is listening at ${port}`));
 
 
 
