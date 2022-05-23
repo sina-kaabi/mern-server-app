@@ -1,32 +1,37 @@
 const Post = require('../models/post');
-const slugify = require('slugify')
+const slugify = require('slugify');
 
 
 exports.create = (req, res) => {
     //console.log(req.body);
-    const { title, content, user} = req.body
-    const slug = slugify(title) //My post will be lowercased 
+    const { title, content, user} = req.body;
+    const slug = slugify(title); //My post will be lowercased 
+    
     //validate 
-   
     switch(true) {
         case !title:
-        return res.status(400).json({error: 'Title is required'});
+        return res.status(400).json({ error: 'Title is required' });
         break;
         case !content:
-            return res.status(400).json({error: 'Content is required'});
+            return res.status(400).json({error: 'Content is required' });
             break;
     }
 
     // create post
 
-    Post.create({title, content, user, slug}, (err, post) => {
+    Post.create({title, content, user, slug }, (err, post) => {
         if(err) {
+            
             console.log(err);
-            //alert(err);
-            res.status(400).json({error: 'Duplicate post. Try another title'});
+             //res.status(400).json({ error: 'Duplicate post. Try another title' });
 
-        }
-        res.json(post);
+    }  
+            res.json(post);
+            
+           
+
+        
+        
     });
 
 
