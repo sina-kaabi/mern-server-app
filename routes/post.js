@@ -1,15 +1,11 @@
 const express = require('express');
+
 const router = express.Router();
 
-// import contoller methods 
-
-const { create } = require('../controllers/posts');
-
+// import controller methods
+const { create, list } = require('../controllers/post');
 
 router.post('/post', create);
+router.get('/posts', list);
 
 module.exports = router;
-
-
-
-
