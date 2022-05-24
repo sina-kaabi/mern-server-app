@@ -7,5 +7,6 @@ const { create, list } = require('../controllers/post');
 
 router.post('/post', create);
 router.get('/posts', list);
+router.get('/post/:slug', )
 
 module.exports = router;
