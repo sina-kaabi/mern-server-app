@@ -3,7 +3,7 @@ const slugify = require('slugify');
 
 exports.create = (req, res) => {
     // console.log(req.body);
-    const { title, content, user } = req.body;
+    const { title, content, user } = req.body; // req.params
     const slug = slugify(title);
     // validate
     switch (true) {
@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     Post.create({ title, content, user, slug }, (err, post) => {
         if (err) {
             console.log(err);
-           // res.status(400).json({ error: 'Duplicate post. Try another title' });
+          //  res.status(400).json({ error: 'Duplicate post. Try another title' });
         }
         res.json(post);
     });
@@ -33,3 +33,13 @@ exports.list = (req, res) => {
             res.json(posts);
         });
 };
+
+exports.read = (req, res) => {
+   // console.log(req.params.slug);
+    const { slug } = req.params;
+    Post.findOne({ slug }).exec((err, post) => {
+            if (err) console.log(err);
+            res.json(post);
+        });
+};
+
