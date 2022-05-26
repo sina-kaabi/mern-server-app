@@ -46,8 +46,8 @@ exports.read = (req, res) => {
 exports.update = (req, res) => {
     const { slug } = req.params;
     const { title, content, user } = req.body;
-    Post.findOneAndUpdate({slug}, {title, content, user}, {new: true}).exec((err, post) => {
-        if(err) console.log(err);
+    Post.findOneAndUpdate({ slug }, {title, content, user}, {new: true}).exec((err, post) => {
+        if (err) console.log(err);
         res.json(post);
     });
 };
