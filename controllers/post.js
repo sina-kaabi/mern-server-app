@@ -3,7 +3,7 @@ const slugify = require('slugify');
 
 exports.create = (req, res) => {
     // console.log(req.body);
-    const { title, content, user } = req.body; // req.params
+    const { title, content, user } = req.body;
     const slug = slugify(title);
     // validate
     switch (true) {
@@ -18,7 +18,7 @@ exports.create = (req, res) => {
     Post.create({ title, content, user, slug }, (err, post) => {
         if (err) {
             console.log(err);
-          //  res.status(400).json({ error: 'Duplicate post. Try another title' });
+            res.status(400).json({ error: 'Duplicate post. Try another title' });
         }
         res.json(post);
     });
@@ -35,46 +35,32 @@ exports.list = (req, res) => {
 };
 
 exports.read = (req, res) => {
-   // console.log(req.params.slug);
+    // console.log(req.pramas.slug)
     const { slug } = req.params;
     Post.findOne({ slug }).exec((err, post) => {
-            if (err) console.log(err);
-            res.json(post);
-        });
+        if (err) console.log(err);
+        res.json(post);
+    });
 };
 
 exports.update = (req, res) => {
     const { slug } = req.params;
     const { title, content, user } = req.body;
-    Post.findOneAndUpdate({ slug }, {title, content, user}, {new: true}).exec((err, post) => {
+    Post.findOneAndUpdate({ slug }, { title, content, user }, { new: true }).exec((err, post) => {
         if (err) console.log(err);
         res.json(post);
     });
 };
 
 exports.remove = (req, res) => {
-    // console.log(req.params.slug);
-     const { slug } = req.params;
-     Post.findOneAndRemove({ slug }).exec((err, post) => {
-             if (err) console.log(err);
-             res.json({ message: 'Post deleted'
-         });
- });
-
+    // console.log(req.pramas.slug)
+    const { slug } = req.params;
+    Post.findOneAndRemove({ slug }).exec((err, post) => {
+        if (err) console.log(err);
+        res.json({
+            message: 'Post deleted'
+        });
+    });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
