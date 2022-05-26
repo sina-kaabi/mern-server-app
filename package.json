@@ -29,5 +29,6 @@
     "url": "https://github.com/sina-kaabi/mern-server-app/issues"
   },
   "homepage": "https://github.com/sina-kaabi/mern-server-app#readme",
+  "devDependencies": {},
   "description": ""
 }
